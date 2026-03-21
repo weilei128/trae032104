@@ -1,0 +1,5 @@
+id,username,password,admin
+1,admin,admin123,true
+2,user1,user123,false
+3,user2,user123,false
+4,user3,user123,false

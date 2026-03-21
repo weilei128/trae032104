@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品列表 - 简易商城</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { font-size: 24px; }
+        .header-right { display: flex; align-items: center; gap: 15px; }
+        .header-right span { font-size: 14px; }
+        .header-right a { color: white; text-decoration: none; padding: 8px 15px; border: 1px solid white; border-radius: 5px; font-size: 14px; }
+        .header-right a:hover { background: rgba(255,255,255,0.2); }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+        .nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .nav-tabs a { padding: 10px 20px; background: white; border-radius: 5px; text-decoration: none; color: #333; }
+        .nav-tabs a.active { background: #667eea; color: white; }
+        .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .product-card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .product-card h3 { color: #333; margin-bottom: 10px; }
+        .product-card .price { color: #e74c3c; font-size: 24px; font-weight: bold; margin-bottom: 10px; }
+        .product-card .stock { color: #27ae60; font-size: 14px; margin-bottom: 10px; }
+        .product-card .desc { color: #666; font-size: 14px; margin-bottom: 15px; line-height: 1.5; }
+        .product-card .order-form { display: flex; gap: 10px; align-items: center; }
+        .product-card input { width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 5px; text-align: center; }
+        .product-card button { flex: 1; padding: 8px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .product-card button:hover { background: #5a6fd6; }
+        .product-card button:disabled { background: #ccc; cursor: not-allowed; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+        .modal.show { display: flex; }
+        .modal-content { background: white; padding: 30px; border-radius: 10px; text-align: center; }
+        .modal-content h2 { margin-bottom: 15px; }
+        .modal-content button { padding: 10px 30px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>简易商城</h1>
+        <div class="header-right">
+            <span>欢迎，<span th:text="${user.username}"></span></span>
+            <a href="/my-orders">我的订单</a>
+            <a href="/logout">退出</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="nav-tabs">
+            <a href="/shop" class="active">商品列表</a>
+            <a href="/my-orders">我的订单</a>
+        </div>
+        <div class="products">
+            <div class="product-card" th:each="product : ${products}">
+                <h3 th:text="${product.name}"></h3>
+                <div class="price">¥<span th:text="${product.price}"></span></div>
+                <div class="stock">库存：<span th:text="${product.stock}"></span> 件</div>
+                <div class="desc" th:text="${product.description}"></div>
+                <div class="order-form">
+                    <input type="number" min="1" th:max="${product.stock}" value="1" th:id="'qty-' + ${product.id}">
+                    <button th:onclick="'createOrder(' + ${product.id} + ')'" th:disabled="${product.stock <= 0}">购买</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <h2>下单成功！</h2>
+            <p>您可以在"我的订单"中查看</p>
+            <button onclick="closeModal()">确定</button>
+        </div>
+    </div>
+    <script>
+        function createOrder(productId) {
+            var qty = document.getElementById('qty-' + productId).value;
+            fetch('/order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'productId=' + productId + '&quantity=' + qty
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('successModal').classList.add('show');
+                } else {
+                    alert(data.message);
+                }
+            });
+        }
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('show');
+            location.reload();
+        }
+    </script>
+</body>
+</html>
