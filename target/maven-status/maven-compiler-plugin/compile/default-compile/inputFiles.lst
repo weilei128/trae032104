@@ -1,0 +1,15 @@
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\ShopApplication.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\aspect\AuthorizationAspect.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\controller\LoginController.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\annotation\RequireRole.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\service\OrderService.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\service\ProductService.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\entity\User.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\config\WebConfig.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\util\JwtUtil.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\interceptor\JwtInterceptor.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\controller\AdminController.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\entity\Order.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\controller\ShopController.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\entity\Product.java
+D:\workspace\traeTest\trae032104\trae0321_GLM\src\main\java\com\shop\service\UserService.java

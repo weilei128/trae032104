@@ -1,0 +1,15 @@
+com\shop\annotation\RequireRole.class
+com\shop\util\JwtUtil.class
+com\shop\controller\ShopController.class
+com\shop\config\WebConfig.class
+com\shop\controller\LoginController.class
+com\shop\service\ProductService.class
+com\shop\service\UserService.class
+com\shop\service\OrderService.class
+com\shop\entity\Product.class
+com\shop\entity\User.class
+com\shop\controller\AdminController.class
+com\shop\ShopApplication.class
+com\shop\aspect\AuthorizationAspect.class
+com\shop\entity\Order.class
+com\shop\interceptor\JwtInterceptor.class
